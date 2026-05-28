@@ -9,6 +9,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import os
 import matplotlib
 matplotlib.use('Agg')  # Headless backend to prevent rendering threads conflicts
 import matplotlib.pyplot as plt
