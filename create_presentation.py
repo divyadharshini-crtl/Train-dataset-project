@@ -437,8 +437,9 @@ def create_professional_pptx():
     p_t2.alignment = PP_ALIGN.CENTER
     p_t2.space_before = Pt(15)
     
-    # Save the PPTX file
-    pptx_filename = "Sysslan_Internship_Presentation.pptx"
+    # Save the PPTX file inside the separate presentation directory
+    os.makedirs("presentation", exist_ok=True)
+    pptx_filename = os.path.join("presentation", "Sysslan_Internship_Presentation.pptx")
     prs.save(pptx_filename)
     print(f"-> Editable PowerPoint presentation saved to '{os.path.abspath(pptx_filename)}'")
     print("=" * 60)
