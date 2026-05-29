@@ -433,15 +433,13 @@ if data_loaded:
                             elif s_row["SN"] == row["Dest_SN"]:
                                 badge_html = " <span style='background:#EF4444; color:#fff; font-size:10px; padding:2px 8px; border-radius:10px; font-weight:bold;'>ARRIVE AT</span>"
                                 
-                            timeline_html += f"""
-                            <div class="timeline-item {active_class}">
-                                <div class="timeline-dot {dot_active}"></div>
-                                <div style="{label_weight} font-size:0.95rem;">
-                                    Stop {s_row['SN']}: {s_row['Station_Name']} ({s_row['Station_Code']}) - {s_row['Distance']} km{badge_html}
-                                </div>
-                                <div style="color:#94A3B8; font-size:0.85rem; margin-top:2px;">{timing_str}</div>
-                            </div>
-                            """
+                            timeline_html += f"""<div class="timeline-item {active_class}">
+<div class="timeline-dot {dot_active}"></div>
+<div style="{label_weight} font-size:0.95rem;">
+Stop {s_row['SN']}: {s_row['Station_Name']} ({s_row['Station_Code']}) - {s_row['Distance']} km{badge_html}
+</div>
+<div style="color:#94A3B8; font-size:0.85rem; margin-top:2px;">{timing_str}</div>
+</div>"""
                         timeline_html += "</div>"
                         st.markdown(timeline_html, unsafe_allow_html=True)
                         
