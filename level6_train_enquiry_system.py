@@ -5,6 +5,16 @@ import os
 from datetime import datetime
 import matplotlib.pyplot as plt
 
+# Custom HTML render helpers to dynamically strip leading indentation spaces at runtime
+# This prevents the Markdown parser from misinterpreting indented HTML lines as raw code blocks.
+def st_html(html_str):
+    cleaned = "\n".join([line.strip() for line in html_str.split("\n") if line.strip() != ""])
+    st.markdown(cleaned, unsafe_allow_html=True)
+
+def st_sidebar_html(html_str):
+    cleaned = "\n".join([line.strip() for line in html_str.split("\n") if line.strip() != ""])
+    st.sidebar.markdown(cleaned, unsafe_allow_html=True)
+
 # Set page config with modern title and icon
 st.set_page_config(
     page_title="Train Enquiry & Analytics System",
@@ -419,19 +429,19 @@ def generate_premium_model_chart():
 
 if data_loaded:
     # Sidebar Redesign (Matches the Apexify layout: Brand header + Tasks Menu + Premium Cohort card + Dark mode toggle)
-    st.sidebar.markdown("""
+    st_sidebar_html("""
     <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 2rem; padding: 0 10px;">
         <div style="background: #8B5CF6; width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.15rem; box-shadow: 0 0 15px rgba(139, 92, 246, 0.45);">
             🚆
         </div>
         <span style="font-size: 1.25rem; font-weight: 700; color: #F8FAFC; letter-spacing: -0.5px;">Trainify Hub</span>
     </div>
-    """, unsafe_allow_html=True)
+    """)
     
     st.sidebar.markdown("<p style='font-size:0.75rem;color:#64748B;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.75rem;padding:0 10px;'>Internship Archive</p>", unsafe_allow_html=True)
     
     # Sidebar deliverables list styled neatly
-    st.sidebar.markdown("""
+    st_sidebar_html("""
     <div style="display: flex; flex-direction: column; gap: 4px; padding: 0 10px; margin-bottom: 2rem;">
         <div style="display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: #94A3B8; padding: 8px 10px; border-radius: 6px; background: rgba(255,255,255,0.01);">
             <span style="color:#8B5CF6; font-weight:bold;">✓</span> Level 1: Basic Review
@@ -452,10 +462,10 @@ if data_loaded:
             <span style="color:#8B5CF6; font-weight:bold;">✓</span> Level 6: Capstone App
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """)
     
     # Premium Cohort card at the bottom of the sidebar
-    st.sidebar.markdown("""
+    st_sidebar_html("""
     <div style="background: #131217; border: 1px solid rgba(255,255,255,0.04); border-radius: 12px; padding: 1.1rem; margin-top: 5rem; margin-bottom: 1rem; position: relative;">
         <div style="background: rgba(139, 92, 246, 0.1); width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem; font-size: 1.1rem;">
             🏆
@@ -470,7 +480,7 @@ if data_loaded:
         <span>🌙 Dark Mode toggle</span>
         <span style="color: #8B5CF6; font-weight: 600;">ON</span>
     </div>
-    """, unsafe_allow_html=True)
+    """)
     
     # Main Header Section matching "Dashboard" style
     st.markdown("<h1 class='main-title'>Dashboard</h1>", unsafe_allow_html=True)
@@ -489,46 +499,46 @@ if data_loaded:
         col_k1, col_k2, col_k3, col_k4 = st.columns(4)
         
         with col_k1:
-            st.markdown(f"""
+            st_html(f"""
             <div class="gradient-card">
                 <div class="metric-label" style="color: rgba(255,255,255,0.78);">Total Train Runs</div>
                 <div class="metric-value">{len(df_durations):,}</div>
                 <div class="metric-trend" style="color: rgba(255,255,255,0.85);">▲ 12.05% <span style="opacity: 0.7; font-weight: 400; font-size: 0.7rem;">vs last month</span></div>
             </div>
-            """, unsafe_allow_html=True)
+            """)
             
         with col_k2:
-            st.markdown(f"""
+            st_html(f"""
             <div class="kpi-card">
                 <div class="metric-label">Total Station Nodes</div>
                 <div class="metric-value">{len(df_traffic):,}</div>
                 <div class="metric-trend trend-up">▲ 8.12% <span style="color: #64748B; font-weight: 400; font-size: 0.7rem;">vs last month</span></div>
             </div>
-            """, unsafe_allow_html=True)
+            """)
             
         with col_k3:
-            st.markdown(f"""
+            st_html(f"""
             <div class="kpi-card">
                 <div class="metric-label">Total Route Stops</div>
                 <div class="metric-value">{len(df_clean):,}</div>
                 <div class="metric-trend trend-down">▼ 3.14% <span style="color: #64748B; font-weight: 400; font-size: 0.7rem;">vs last month</span></div>
             </div>
-            """, unsafe_allow_html=True)
+            """)
             
         with col_k4:
-            st.markdown(f"""
+            st_html(f"""
             <div class="kpi-card">
                 <div class="metric-label">Busiest Network Terminal</div>
                 <div class="metric-value" style="font-size: 1.8rem; margin-top: 0.8rem;">CSMT Mumbai</div>
                 <div class="metric-trend trend-up">▲ 1,027 <span style="color: #64748B; font-weight: 400; font-size: 0.7rem;">daily trains visiting</span></div>
             </div>
-            """, unsafe_allow_html=True)
+            """)
             
         # Row 2: Charts and progress compositions (2 columns: 2/3 width left, 1/3 width right)
         col_c_left, col_c_right = st.columns([2.1, 1.0])
         
         with col_c_left:
-            st.markdown("""
+            st_html("""
             <div class="kpi-card" style="padding-bottom: 0.7rem;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                     <div>
@@ -540,14 +550,14 @@ if data_loaded:
                     </div>
                 </div>
             </div>
-            """, unsafe_allow_html=True)
+            """)
             # Inject premium visual chart in the column
             fig_model = generate_premium_model_chart()
             st.pyplot(fig_model)
             
         with col_c_right:
             # Route Type Composition analogue to "Session by Country" progress list
-            st.markdown("""
+            st_html("""
             <div class="kpi-card" style="height: 384px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
                     <span style="font-weight: 700; font-size: 1.05rem; color:#FFFFFF;">Route Composition Share</span>
@@ -598,10 +608,10 @@ if data_loaded:
                     <span class="progress-value">15%</span>
                 </div>
             </div>
-            """, unsafe_allow_html=True)
+            """)
             
         # Row 3: Busiest corridors activity (equivalent to Transaction History)
-        st.markdown("""
+        st_html("""
         <div class="kpi-card" style="margin-top: 0.5rem;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                 <div>
@@ -703,7 +713,7 @@ if data_loaded:
                 </tbody>
             </table>
         </div>
-        """, unsafe_allow_html=True)
+        """)
         
         # Collapsible expansion for Levels 4 & 5 charts under Dashboard Overview
         st.markdown("<div style='height:1rem;'></div>", unsafe_allow_html=True)
@@ -715,42 +725,42 @@ if data_loaded:
             with sub_t1:
                 col_sa, col_sb = st.columns(2)
                 with col_sa:
-                    st.markdown("""
+                    st_html("""
                     <div class="kpi-card" style="margin-bottom: 0.5rem; border-color: rgba(139, 92, 246, 0.1);">
                         <div style="font-weight: 700; font-size: 0.95rem; color:#8B5CF6;">Journey Duration Skewness</div>
                         <div style="color: #94A3B8; font-size:0.8rem; margin-top:0.15rem;">Distribution curve peaks at low travel hours, highlighting heavy commuter densities.</div>
                     </div>
-                    """, unsafe_allow_html=True)
+                    """)
                     if os.path.exists("visualizations/duration_distribution.png"):
                         st.image("visualizations/duration_distribution.png", use_container_width=True)
                 with col_sb:
-                    st.markdown("""
+                    st_html("""
                     <div class="kpi-card" style="margin-bottom: 0.5rem; border-color: rgba(139, 92, 246, 0.1);">
                         <div style="font-weight: 700; font-size: 0.95rem; color:#8B5CF6;">Route Classifications Averages</div>
                         <div style="color: #94A3B8; font-size:0.8rem; margin-top:0.15rem;">Average journey times clearly demarcating Short, Medium, and Long routes.</div>
                     </div>
-                    """, unsafe_allow_html=True)
+                    """)
                     if os.path.exists("visualizations/avg_duration_by_route.png"):
                         st.image("visualizations/avg_duration_by_route.png", use_container_width=True)
                         
             with sub_t2:
                 col_sc, col_sd = st.columns(2)
                 with col_sc:
-                    st.markdown("""
+                    st_html("""
                     <div class="kpi-card" style="margin-bottom: 0.5rem; border-color: rgba(139, 92, 246, 0.1);">
                         <div style="font-weight: 700; font-size: 0.95rem; color:#8B5CF6;">Station Route Composition</div>
                         <div style="color: #94A3B8; font-size:0.8rem; margin-top:0.15rem;">Thermal composition showing CSMT consists of 95% Short local commuter runs.</div>
                     </div>
-                    """, unsafe_allow_html=True)
+                    """)
                     if os.path.exists("visualizations/station_route_composition.png"):
                         st.image("visualizations/station_route_composition.png", use_container_width=True)
                 with col_sd:
-                    st.markdown("""
+                    st_html("""
                     <div class="kpi-card" style="margin-bottom: 0.5rem; border-color: rgba(139, 92, 246, 0.1);">
                         <div style="font-weight: 700; font-size: 0.95rem; color:#8B5CF6;">Origin-Destination Frequencies</div>
                         <div style="color: #94A3B8; font-size:0.8rem; margin-top:0.15rem;">Cross-tabulation mapping top density transit loops between metro nodes.</div>
                     </div>
-                    """, unsafe_allow_html=True)
+                    """)
                     if os.path.exists("visualizations/origin_destination_corridors.png"):
                         st.image("visualizations/origin_destination_corridors.png", use_container_width=True)
 
@@ -820,12 +830,12 @@ if data_loaded:
                     })
             
             if not direct_trains:
-                st.markdown(f"""
+                st_html(f"""
                 <div class="kpi-card" style="border-color: rgba(239, 68, 68, 0.35); background: rgba(239, 68, 68, 0.05); margin-top: 1rem;">
                     <div style="color: #F87171; font-weight: 700; font-size: 1.15rem;">No Direct Route Found</div>
                     <div style="color: #94A3B8; font-size:0.95rem; margin-top:0.4rem;">There are no direct train routes operating from <b>{source_input.split(" (")[0]}</b> to <b>{dest_input.split(" (")[0]}</b>. Please check alternate hubs.</div>
                 </div>
-                """, unsafe_allow_html=True)
+                """)
             else:
                 st.markdown(f"Found **{len(direct_trains)}** direct trains between these stations:")
                 
@@ -842,33 +852,33 @@ if data_loaded:
                         # Fares and statistics columns styled exactly like KPI cards
                         col_fa, col_fb, col_fc, col_fd = st.columns(4)
                         with col_fa:
-                            st.markdown(f"""
+                            st_html(f"""
                             <div class="kpi-card" style="padding:1rem; border-color: rgba(255, 0, 127, 0.15);">
                                 <div class="metric-label">Sleeper Class</div>
                                 <div class="metric-value" style="font-size:1.6rem; color:#FF007F;">₹{row['Fare_SL']}</div>
                             </div>
-                            """, unsafe_allow_html=True)
+                            """)
                         with col_fb:
-                            st.markdown(f"""
+                            st_html(f"""
                             <div class="kpi-card" style="padding:1rem; border-color: rgba(139, 92, 246, 0.15);">
                                 <div class="metric-label">3 AC Class</div>
                                 <div class="metric-value" style="font-size:1.6rem; color:#8B5CF6;">₹{row['Fare_3A']}</div>
                             </div>
-                            """, unsafe_allow_html=True)
+                            """)
                         with col_fc:
-                            st.markdown(f"""
+                            st_html(f"""
                             <div class="kpi-card" style="padding:1rem; border-color: rgba(59, 130, 246, 0.15);">
                                 <div class="metric-label">2 AC Class</div>
                                 <div class="metric-value" style="font-size:1.6rem; color:#3B82F6;">₹{row['Fare_2A']}</div>
                             </div>
-                            """, unsafe_allow_html=True)
+                            """)
                         with col_fd:
-                            st.markdown(f"""
+                            st_html(f"""
                             <div class="kpi-card" style="padding:1rem; border-color: rgba(16, 185, 129, 0.15);">
                                 <div class="metric-label">1 AC Class</div>
                                 <div class="metric-value" style="font-size:1.6rem; color:#10B981;">₹{row['Fare_1A']}</div>
                             </div>
-                            """, unsafe_allow_html=True)
+                            """)
                             
                         # Show entire itinerary timeline with fixed indentation
                         st.markdown("<h4 style='margin-top:1.5rem;margin-bottom:1rem;'>Full Route Itinerary Timeline</h4>", unsafe_allow_html=True)
@@ -937,25 +947,25 @@ Stop {s_row['SN']}: {s_row['Station_Name']} ({s_row['Station_Code']}) - {s_row['
             col_s1, col_s2, col_s3 = st.columns(3)
             
             with col_s1:
-                st.markdown(f"""
+                st_html(f"""
                 <div class="gradient-card">
                     <div class="metric-label" style="color:rgba(255,255,255,0.78);">National Traffic Rank</div>
                     <div class="metric-value">Rank #{rank}</div>
                     <div class="metric-trend" style="color:rgba(255,255,255,0.85);">Out of {len(df_traffic):,} active stations</div>
                 </div>
-                """, unsafe_allow_html=True)
+                """)
                 
             with col_s2:
-                st.markdown(f"""
+                st_html(f"""
                 <div class="kpi-card">
                     <div class="metric-label">Daily Visiting Services</div>
                     <div class="metric-value">{visit_count:,} Trains</div>
                     <div class="metric-trend trend-up">▲ Active Junction</div>
                 </div>
-                """, unsafe_allow_html=True)
+                """)
                 
             with col_s3:
-                st.markdown(f"""
+                st_html(f"""
                 <div class="kpi-card">
                     <div class="metric-label">Operational breakdown</div>
                     <div style="font-size:0.95rem; color:#F8FAFC; margin-top:0.75rem; font-weight: 500;">
@@ -966,7 +976,7 @@ Stop {s_row['SN']}: {s_row['Station_Name']} ({s_row['Station_Code']}) - {s_row['
                         * <b>Passing halts</b>: {passing_trains_count} services
                     </div>
                 </div>
-                """, unsafe_allow_html=True)
+                """)
                 
             # Passing schedule table styled elegantly
             st.markdown(f"#### Complete Schedule Board for {exp_station_input.split(' (')[0]}")
