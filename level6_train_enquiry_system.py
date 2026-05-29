@@ -223,7 +223,7 @@ if df_schedule is not None:
             data=top_10_traffic,
             palette=bar_colors,
             ax=ax,
-            edgecolor="rgba(0, 242, 254, 0.3)",
+            edgecolor="#00F2FE",
             linewidth=1.2
         )
         
