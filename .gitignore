@@ -35,3 +35,4 @@ ENV/
 Thumbs.db
 desktop.ini
 *.log
+*.zip
