@@ -390,7 +390,7 @@ def generate_premium_model_chart():
     ax.fill_between(x_indices, y_baseline, color='#F59E0B', alpha=0.04)
     
     # Customize grid & spines to blend in perfectly
-    ax.grid(color='rgba(255, 255, 255, 0.04)', linestyle='-', linewidth=0.8, axis='y')
+    ax.grid(color=(1.0, 1.0, 1.0, 0.04), linestyle='-', linewidth=0.8, axis='y')
     ax.grid(False, axis='x')
     
     for spine in ['top', 'right', 'left', 'bottom']:
