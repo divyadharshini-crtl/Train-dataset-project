@@ -6,7 +6,7 @@ from datetime import datetime
 
 # Set page config with modern title and icon
 st.set_page_config(
-    page_title="Pulsar Rail - Train Enquiry & Analytics",
+    page_title="Train Enquiry & Analytics System",
     page_icon="🚆",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -280,10 +280,10 @@ if data_loaded:
     """, unsafe_allow_html=True)
     
     st.sidebar.markdown("---")
-    st.sidebar.markdown("<small style='color:#475569;'>Antigravity Portal v1.5<br>© Pulsar Rail Engine</small>", unsafe_allow_html=True)
+    st.sidebar.markdown("<small style='color:#475569;'>Antigravity Portal v1.5<br>© Sysslan IT Solutions</small>", unsafe_allow_html=True)
     
     # Main Header
-    st.markdown("<h1 class='main-title'>PULSAR RAIL</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 class='main-title'>TRAIN ENQUIRY & ANALYTICS</h1>", unsafe_allow_html=True)
     st.markdown("<div class='branding-sub'>Sysslan IT Solutions • Data Analysis Capstone</div>", unsafe_allow_html=True)
     
     # Tab Layout
@@ -637,4 +637,4 @@ Stop {s_row['SN']}: {s_row['Station_Name']} ({s_row['Station_Code']}) - {s_row['
             st.dataframe(df_board, use_container_width=True, hide_index=True)
             
 else:
-    st.info("Please complete data review and processing stages to unlock Pulsar Rail Web App.")
+    st.info("Please complete data review and processing stages to unlock the Train Enquiry Web App.")

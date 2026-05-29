@@ -53,7 +53,7 @@ def run_recorder():
     out = cv2.VideoWriter(output_filename, fourcc, fps, (screen_width, screen_height))
     
     print("=" * 60)
-    print("      PULSAR SCREEN RECORDER IS NOW READY      ")
+    print("     SYSSLAN SCREEN RECORDER IS NOW READY      ")
     print("=" * 60)
     print(f"-> Output file will be saved as: '{output_filename}'")
     print("-> Recording starts in 5 seconds...")
